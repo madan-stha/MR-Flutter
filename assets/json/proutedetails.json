@@ -1,0 +1,248 @@
+{
+  "route": {
+    "id": 1,
+    "name": "Updated Route"
+  },
+  "pickups": [
+    {
+      "id": 5,
+      "route_id": 3,
+      "customer_id": 8,
+      "status": "in_progress",
+      "notes": "Delivery scheduled",
+      "materials": [
+        {
+          "name": "Wood",
+          "amount": 150,
+          "rate": 20,
+          "weighing_type": "manual"
+        },
+        {
+          "name": "Nails",
+          "amount": 1000,
+          "rate": 5,
+          "weighing_type": "manual"
+        }
+      ],
+      "n_bins": 2,
+      "tare_weight": [
+        30,
+        45
+      ],
+      "meta": {
+        "name": "User 8",
+        "contact": "9779845678901",
+        "extra": "Additional information"
+      },
+      "image": [
+        "http://smc.schost.me/image7.jpg",
+        "http://smc.schost.me/image8.jpg"
+      ],
+      "coordinates": [
+        "27.7018658",
+        "85.3363784"
+      ],
+      "adhoc_id": null,
+      "deleted_at": null,
+      "created_at": "2024-05-16T09:30:00.000000Z",
+      "updated_at": "2024-05-16T09:30:00.000000Z",
+      "customer": {
+        "id": 8,
+        "name": "Client A",
+        "contact": "9779845678901"
+      }
+    },
+    {
+      "id": 6,
+      "route_id": 3,
+      "customer_id": 9,
+      "status": "pending",
+      "notes": "Materials picked up",
+      "materials": [
+        {
+          "name": "Concrete",
+          "amount": 200,
+          "rate": 30,
+          "weighing_type": "manual"
+        },
+        {
+          "name": "Rebar",
+          "amount": 300,
+          "rate": 25,
+          "weighing_type": "manual"
+        }
+      ],
+      "n_bins": 2,
+      "tare_weight": [
+        35,
+        50
+      ],
+      "meta": {
+        "name": "User 9",
+        "contact": "9779856789012",
+        "extra": "Additional information"
+      },
+      "image": [
+        "http://smc.schost.me/image9.jpg",
+        "http://smc.schost.me/image10.jpg"
+      ],
+      "coordinates": [
+        "27.6825008",
+        "85.3435103"
+      ],
+      "adhoc_id": null,
+      "deleted_at": null,
+      "created_at": "2024-05-16T11:00:00.000000Z",
+      "updated_at": "2024-05-16T11:00:00.000000Z",
+      "customer": {
+        "id": 9,
+        "name": "Client B",
+        "contact": "9779856789012"
+      }
+    },
+    {
+      "id": 7,
+      "route_id": 4,
+      "customer_id": 10,
+      "status": "active",
+      "notes": "Order confirmed",
+      "materials": [
+        {
+          "name": "Tiles",
+          "amount": 500,
+          "rate": 18,
+          "weighing_type": "manual"
+        },
+        {
+          "name": "Ceramic",
+          "amount": 300,
+          "rate": 25,
+          "weighing_type": "manual"
+        }
+      ],
+      "n_bins": 2,
+      "tare_weight": [
+        40,
+        55
+      ],
+      "meta": {
+        "name": "User 10",
+        "contact": "9779867890123",
+        "extra": "Additional information"
+      },
+      "image": [
+        "http://smc.schost.me/image11.jpg",
+        "http://smc.schost.me/image12.jpg"
+      ],
+      "coordinates": [
+        "27.6824996",
+        "85.3357855"
+      ],
+      "adhoc_id": null,
+      "deleted_at": null,
+      "created_at": "2024-05-16T12:30:00.000000Z",
+      "updated_at": "2024-05-16T12:30:00.000000Z",
+      "customer": {
+        "id": 10,
+        "name": "Client C",
+        "contact": "9779867890123"
+      }
+    },
+    {
+      "id": 8,
+      "route_id": 4,
+      "customer_id": 11,
+      "status": "active",
+      "notes": "Materials delivered",
+      "materials": [
+        {
+          "name": "Paint",
+          "amount": 200,
+          "rate": 15,
+          "weighing_type": "manual"
+        },
+        {
+          "name": "Brushes",
+          "amount": 100,
+          "rate": 8,
+          "weighing_type": "manual"
+        }
+      ],
+      "n_bins": 2,
+      "tare_weight": [
+        35,
+        45
+      ],
+      "meta": {
+        "name": "User 11",
+        "contact": "9779878901234",
+        "extra": "Additional information"
+      },
+      "image": [
+        "http://smc.schost.me/image13.jpg",
+        "http://smc.schost.me/image14.jpg"
+      ],
+      "coordinates": [
+        "27.6273908",
+        "85.5149671"
+      ],
+      "adhoc_id": null,
+      "deleted_at": null,
+      "created_at": "2024-05-16T14:00:00.000000Z",
+      "updated_at": "2024-05-16T14:00:00.000000Z",
+      "customer": {
+        "id": 11,
+        "name": "Client D",
+        "contact": "9779878901234"
+      }
+    },
+    {
+      "id": 9,
+      "route_id": 5,
+      "customer_id": 12,
+      "status": "pending",
+      "notes": "Order ready for pickup",
+      "materials": [
+        {
+          "name": "Glass",
+          "amount": 300,
+          "rate": 25,
+          "weighing_type": "manual"
+        },
+        {
+          "name": "Aluminum",
+          "amount": 200,
+          "rate": 20,
+          "weighing_type": "manual"
+        }
+      ],
+      "n_bins": 2,
+      "tare_weight": [
+        40,
+        50
+      ],
+      "meta": {
+        "name": "User 12",
+        "contact": "9779889012345",
+        "extra": "Additional information"
+      },
+      "image": [
+        "http://smc.schost.me/image15.jpg",
+        "http://smc.schost.me/image16.jpg"
+      ],
+      "coordinates": [
+        "27.5867195",
+        "85.5097395"
+      ],
+      "adhoc_id": null,
+      "deleted_at": null,
+      "created_at": "2024-05-17T09:00:00.000000Z",
+      "updated_at": "2024-05-17T09:00:00.000000Z",
+      "customer": {
+        "id": 12,
+        "name": "Client E",
+        "contact": "9779889012345"
+      }
+    }
+  ]
+}

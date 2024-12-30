@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "642079525073",
+    "project_id": "metal-recycle-423104",
+    "storage_bucket": "metal-recycle-423104.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:642079525073:android:541a804f8ee3e304e49df0",
+        "android_client_info": {
+          "package_name": "com.shotcoder.smc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB700KDDKz5jm4PYFKRd9S1Q08zm4Q9Nus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

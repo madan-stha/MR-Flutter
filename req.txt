@@ -1,0 +1,13 @@
+Pre-requisites
+
+- on logging app from credentials at readme file, it is showing admin dashboard, need credentials for other user types (driver)
+- in case of map redirecting, what type of map is to be redirected
+- need a code go-through
+
+
+Client's Requirement
+
+- link correction
+- dynamic data load from api
+- image render from api
+- map redirect(google map/iOS map/web)

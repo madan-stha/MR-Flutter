@@ -1,0 +1,32 @@
+{
+    "app_name": "Faculty",
+    "intro_screen_text_1": "Fast-Track Your Future with DN LMS",
+    "intro_screen_text_2": "Unlock Your Potential",
+    "intro_screen_text_3": "Hit the Ground Running",
+    "intro_screen_subtitle_1": "Conquer exams & level up skills with daily live classes & effortless preparation.",
+    "intro_screen_subtitle_2": "Dive into daily live classes, prep smarter, and achieve your career goals.",
+    "intro_screen_subtitle_3": "Join daily live classes, simplify exam prep, and take control of your success",
+    "home": "Home",
+
+    "enter_confirm_password": "Enter your Confirm Password",
+    "enter_current_password": "Enter your Current Password",
+    "enter_new_password": "Enter your New Password",
+  
+    "updating_password": "Updating Password...",
+    "password_changed": "Password Changed",
+    "change_password": "Change Password",
+    "current_password": "Current Password",
+    "new_password": "New Password",
+    "confirm_new_password": "Confirm New Password",
+
+    "password_missmatch": "The password confirmation does not match.",
+    "new_password_should_not_be_same_as_current_password": "New password should not be same as current password",
+    "password_changed_successfully": "Password Changed Successfully.",
+    "password_can_not_be_empty": "Password cannot be empty",
+    "password_must_be_more_than_6_digit": "Password field must contain 6 Characters",
+    "password_does_not_match": "Password does not match",
+  
+
+
+    "something_went_wrong": "Sorry, But something is not right at the moment. Please try again later."
+}

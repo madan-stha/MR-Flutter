@@ -1,0 +1,162 @@
+[
+    {
+      "id": "1",
+      "createdBy": "Metal Recycle Corporation",
+      "createdAt": "2024-04-28T08:00:00Z",
+      "title": "Password Changed",
+      "description": "Your password has been successfully changed.",
+      "status": "Changed"
+    },
+    {
+      "id": "2",
+      "createdBy": "Eco Metal Works",
+      "createdAt": "2024-04-28T09:15:00Z",
+      "title": "Verification Required",
+      "description": "Action required! Please verify your account for security purposes.",
+      "status": "Verify"
+    },
+    {
+      "id": "3",
+      "createdBy": "Green Metal Solutions",
+      "createdAt": "2024-04-28T10:30:00Z",
+      "title": "Password Reset",
+      "description": "You have requested a password reset. Please follow the instructions in the email sent to you.",
+      "status": "Reset"
+    },
+    {
+      "id": "4",
+      "createdBy": "Sustainable Metals",
+      "createdAt": "2024-04-28T11:45:00Z",
+      "title": "Account Suspended",
+      "description": "Your account has been temporarily suspended. Please contact support for assistance.",
+      "status": "Suspended"
+    },
+    {
+      "id": "5",
+      "createdBy": "Enviro Scrap",
+      "createdAt": "2024-04-28T13:00:00Z",
+      "title": "Two-Factor Authentication Enabled",
+      "description": "Two-factor authentication has been successfully enabled for your account.",
+      "status": "Enabled"
+    },
+    {
+      "id": "6",
+      "createdBy": "Metal Recycle Corporation",
+      "createdAt": "2024-04-28T14:15:00Z",
+      "title": "Email Changed",
+      "description": "Your email address has been successfully updated.",
+      "status": "Changed"
+    },
+    {
+      "id": "7",
+      "createdBy": "Eco Metal Works",
+      "createdAt": "2024-04-28T15:30:00Z",
+      "title": "Password Expiry Reminder",
+      "description": "Your password will expire in 7 days. Please update it to avoid disruption.",
+      "status": "Reminder"
+    },
+    {
+      "id": "8",
+      "createdBy": "Green Metal Solutions",
+      "createdAt": "2024-04-28T16:45:00Z",
+      "title": "Account Reactivated",
+      "description": "Your account has been reactivated. Welcome back!",
+      "status": "Reactivated"
+    },
+    {
+      "id": "9",
+      "createdBy": "Sustainable Metals",
+      "createdAt": "2024-04-28T18:00:00Z",
+      "title": "Delivery Confirmed",
+      "description": "Your metal recycle delivery has been confirmed and is scheduled for pickup.",
+      "status": "Confirmed"
+    },
+    {
+      "id": "10",
+      "createdBy": "Metal Recycle Corporation",
+      "createdAt": "2024-04-28T19:15:00Z",
+      "title": "Delivery En Route",
+      "description": "Your metal recycle delivery is now en route to the recycling facility.",
+      "status": "In Transit"
+    },
+    {
+      "id": "11",
+      "createdBy": "Eco Metal Works",
+      "createdAt": "2024-04-28T20:30:00Z",
+      "title": "Delivery Arrival",
+      "description": "Your metal recycle delivery has arrived at the recycling facility.",
+      "status": "Arrived"
+    },
+    {
+      "id": "12",
+      "createdBy": "Green Metal Solutions",
+      "createdAt": "2024-04-28T21:45:00Z",
+      "title": "Delivery Processing",
+      "description": "Your metal recycle delivery is currently being processed at the facility.",
+      "status": "Processing"
+    },
+    {
+      "id": "13",
+      "createdBy": "Sustainable Metals",
+      "createdAt": "2024-04-28T23:00:00Z",
+      "title": "Delivery Completed",
+      "description": "Your metal recycle delivery has been successfully processed.",
+      "status": "Completed"
+    },
+    {
+      "id": "14",
+      "createdBy": "Enviro Scrap",
+      "createdAt": "2024-04-29T00:15:00Z",
+      "title": "Delivery Delayed",
+      "description": "Apologies, your metal recycle delivery is delayed due to unforeseen circumstances.",
+      "status": "Delayed"
+    },
+    {
+      "id": "15",
+      "createdBy": "Metal Recycle Corporation",
+      "createdAt": "2024-04-29T01:30:00Z",
+      "title": "Delivery Rejected",
+      "description": "Your metal recycle delivery has been rejected due to contamination.",
+      "status": "Rejected"
+    },
+    {
+      "id": "16",
+      "createdBy": "Eco Metal Works",
+      "createdAt": "2024-04-29T02:45:00Z",
+      "title": "Delivery Rescheduled",
+      "description": "Your metal recycle delivery has been rescheduled for pickup.",
+      "status": "Rescheduled"
+    },
+    {
+      "id": "17",
+      "createdBy": "Green Metal Solutions",
+      "createdAt": "2024-04-29T04:00:00Z",
+      "title": "Delivery Recycled",
+      "description": "Congratulations! Your metal recycle delivery has been successfully recycled.",
+      "status": "Recycled"
+    },
+    {
+      "id": "18",
+      "createdBy": "Sustainable Metals",
+      "createdAt": "2024-04-29T05:15:00Z",
+      "title": "Delivery Error",
+      "description": "Oops! There was an error processing your metal recycle delivery.",
+      "status": "Error"
+    },
+    {
+      "id": "19",
+      "createdBy": "Enviro Scrap",
+      "createdAt": "2024-04-29T06:30:00Z",
+      "title": "Delivery Accepted",
+      "description": "Your metal recycle delivery has been accepted and is awaiting processing.",
+      "status": "Accepted"
+    },
+    {
+      "id": "20",
+      "createdBy": "Metal Recycle Corporation",
+      "createdAt": "2024-04-29T07:45:00Z",
+      "title": "Delivery On Hold",
+      "description": "Your metal recycle delivery is currently on hold. We will update you shortly.",
+      "status": "On Hold"
+    }
+  ]
