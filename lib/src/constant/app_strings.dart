@@ -29,6 +29,7 @@ class AppString {
   static const String sessionExpired = 'Session Expired';
   static const String sessionExpiredMessage =
       'Your session has expired. Please login again.';
+  static const String passwordChangeSuccess = "Password updated successfully.";
 
   /// [Order Status]
   static const String pendingStatus = 'Pending';

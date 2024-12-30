@@ -58,12 +58,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           ? IconButton(
               splashRadius: 20,
               hoverColor: Colors.transparent,
-              icon: Icon(
-                Icons.arrow_back_ios_rounded,
-                color: onlyBackButton
+              icon: Icon(Icons.arrow_back_ios_rounded,
+                  color: onlyBackButton
                       ? AppColors.kPitchBlackColor
                       : Theme.of(context).canvasColor),
-            
               onPressed: () => onBackPressed != null
                   ? onBackPressed!()
                   : Navigator.pop(context),

@@ -11,67 +11,65 @@ class ReusableWidget {
       bool isBold = false,
       String iconType = "svg",
       bool isIconContainer = true}) {
-    return Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          iconType == "svg"
-              ? isIconContainer
-                  ? Container(
-                      height: 26,
-                      width: 26,
-                      padding: const EdgeInsets.all(
-                        Dimensions.paddingSizeExtraSmall,
-                      ),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: AppColors.kPrimaryColor.withOpacity(0.1),
-                      ),
-                      child: SvgHelper.fromSource(
-                        path: icon ?? "",
-                        height: size,
-                        width: size,
-                      ),
-                    )
-                  : SvgHelper.fromSource(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        iconType == "svg"
+            ? isIconContainer
+                ? Container(
+                    height: 26,
+                    width: 26,
+                    padding: const EdgeInsets.all(
+                      Dimensions.paddingSizeExtraSmall,
+                    ),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.kPrimaryColor.withOpacity(0.1),
+                    ),
+                    child: SvgHelper.fromSource(
                       path: icon ?? "",
                       height: size,
                       width: size,
-                    )
-              : Icon(
-                  icon,
-                  color: color,
-                  size: size,
-                ),
-          Gaps.horizontalGapOf(10),
-          value != null
-              ? Row(
-                  children: [
-                    Text(
-                      title ?? 'N/A',
-                      overflow: TextOverflow.ellipsis,
-                      style: isBold
-                          ? AppStyles.text12PxMedium
-                          : AppStyles.text12PxRegular,
                     ),
-                    Text(
-                      value,
-                      style: AppStyles.text12PxRegular,
-                    ),
-                  ],
-                )
-              : Expanded(
-                  child: Text(
+                  )
+                : SvgHelper.fromSource(
+                    path: icon ?? "",
+                    height: size,
+                    width: size,
+                  )
+            : Icon(
+                icon,
+                color: color,
+                size: size,
+              ),
+        Gaps.horizontalGapOf(10),
+        value != null
+            ? Row(
+                children: [
+                  Text(
                     title ?? 'N/A',
                     overflow: TextOverflow.ellipsis,
                     style: isBold
                         ? AppStyles.text12PxMedium
                         : AppStyles.text12PxRegular,
                   ),
+                  Text(
+                    value,
+                    style: AppStyles.text12PxRegular,
+                  ),
+                ],
+              )
+            : Expanded(
+                child: Text(
+                  title ?? 'N/A',
+                  overflow: TextOverflow.ellipsis,
+                  style: isBold
+                      ? AppStyles.text12PxMedium
+                      : AppStyles.text12PxRegular,
                 ),
-        ],
-      ),
+              ),
+      ],
     );
   }
 

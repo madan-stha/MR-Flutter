@@ -13,6 +13,9 @@ class AssignedCard extends StatelessWidget {
         pickup ? name[1].replaceAll('-', '') : name[1].replaceAll('-', '');
     var finalName = '${name[0]} - $name2';
 
+    print("///name// ${name}");
+    print("****name2 ${name2}");
+
     return Card(
       elevation: 1.0,
       surfaceTintColor: Theme.of(context).canvasColor,
