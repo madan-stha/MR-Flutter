@@ -12,12 +12,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: CustomAppBar(
         title: data.name.capitalize(),
-        isBackButtonExist: true,
-        onBackPressed: () {
-          print('Back button pressed');
-          Navigator.pop(context);
-        },
-        isNotification: true,
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -103,7 +98,7 @@ class ProfileScreen extends StatelessWidget {
                     // mainAxisSize: MainAxisSize.min,
                     children: [
                       if (Utility.isAccessible(data.email))
-                        ReusableWidget().iconValue(
+                        ProfileReusableWidget().iconValue(
                           icon: Assets.email,
                           title: data.email,
                           value: '',
@@ -113,7 +108,7 @@ class ProfileScreen extends StatelessWidget {
                           10,
                         ),
                       if (Utility.isAccessible(data.phoneNumber))
-                        ReusableWidget().iconValue(
+                        ProfileReusableWidget().iconValue(
                           icon: Assets.phone,
                           title: data.phoneNumber,
                           value: '',
@@ -131,7 +126,7 @@ class ProfileScreen extends StatelessWidget {
                           10,
                         ),
                       if (Utility.isAccessible(data.zipCode))
-                        ReusableWidget().iconValue(
+                        ProfileReusableWidget().iconValue(
                           icon: Assets.zipCode,
                           title: data.zipCode,
                           value: '',
@@ -141,12 +136,81 @@ class ProfileScreen extends StatelessWidget {
                           10,
                         ),
                       if (Utility.isAccessible(data.language))
-                        ReusableWidget().iconValue(
+                        ProfileReusableWidget().iconValue(
                           icon: Assets.language,
                           title: Utility.getLanguageFromCode(
                             data.language,
                           ),
                           value: '',
+                        ),
+                    ],
+                  ),
+                )),
+
+            //! Branch Container
+            Container(
+                margin: const EdgeInsets.symmetric(
+                  horizontal: Dimensions.paddingSizeDefault,
+                  vertical: Dimensions.paddingSizeExtraSmall,
+                ),
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: Dimensions.paddingSizeSmall,
+                  vertical: Dimensions.paddingSizeSmall,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(
+                    Dimensions.radiusDefault,
+                  ),
+                ),
+                child: TitleActionChild(
+                  title: 'Branch Name: ${data.branch!.branchName} ',
+                  titleStyle: AppStyles.text14PxMedium,
+                  titlePadding: const EdgeInsets.only(
+                    bottom: Dimensions.paddingSizeSmall,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // mainAxisSize: MainAxisSize.min,
+                    children: [
+                      if (Utility.isAccessible(data.branch!.branchEmail))
+                        ProfileReusableWidget().iconValue(
+                          icon: Assets.email,
+                          title: data.branch!.branchEmail,
+                          value: '',
+                        ),
+                      if (Utility.isAccessible(data.branch!.branchEmail))
+                        Gaps.verticalGapOf(
+                          10,
+                        ),
+                      if (Utility.isAccessible(data.branch!.branchPhone))
+                        ProfileReusableWidget().iconValue(
+                          icon: Assets.phone,
+                          title: data.branch!.branchPhone,
+                          value: '',
+                        ),
+                      if (Utility.isAccessible(data.branch!.branchPhone))
+                        Gaps.verticalGapOf(
+                          10,
+                        ),
+                      if (Utility.isAccessible(data.branch!.branchCity) ||
+                          Utility.isAccessible(data.branch!.branchState) ||
+                          Utility.isAccessible(data.branch!.branchCountry))
+                        buildBranchLocationWidget(data),
+                      if (Utility.isAccessible(data.branch!.branchCity))
+                        Gaps.verticalGapOf(
+                          10,
+                        ),
+                      if (Utility.isAccessible(data.branch!.branchZip))
+                        ProfileReusableWidget().iconValue(
+                          icon: Assets.zipCode,
+                          title: data.branch!.branchZip,
+                          value: '',
+                        ),
+                      if (Utility.isAccessible(data.branch!.branchZip))
+                        Gaps.verticalGapOf(
+                          10,
                         ),
                     ],
                   ),
@@ -176,7 +240,32 @@ class ProfileScreen extends StatelessWidget {
       locationText += data.country;
     }
 
-    return ReusableWidget().iconValue(
+    return ProfileReusableWidget().iconValue(
+      icon: Assets.location,
+      title: locationText,
+    );
+  }
+
+  Widget buildBranchLocationWidget(data) {
+    if (!Utility.isAccessible(data.branch.branchCity)) {
+      return const SizedBox.shrink();
+    }
+
+    String locationText = '';
+
+    if (Utility.isAccessible(data.branch!.branchCity)) {
+      locationText += data.branch!.branchCity;
+    }
+    if (Utility.isAccessible(data.branch!.branchState)) {
+      if (locationText.isNotEmpty) locationText += ', ';
+      locationText += data.branch!.branchState;
+    }
+    if (Utility.isAccessible(data.branch!.branchCountry)) {
+      if (locationText.isNotEmpty) locationText += ', ';
+      locationText += data.branch!.branchCountry;
+    }
+
+    return ProfileReusableWidget().iconValue(
       icon: Assets.location,
       title: locationText,
     );

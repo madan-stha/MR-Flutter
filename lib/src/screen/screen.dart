@@ -65,6 +65,7 @@ export 'order/delivery/delivery_screen.dart';
 export 'order/delivery/delivery_card.dart';
 export 'order/delivery/delivery_detail_screen.dart';
 export 'order/delivery/dupdate_screen.dart';
+export 'order/delivery/add_update_materials_screen.dart';
 
 /// [Order] --> [Delivery] --> [Widget]
 export 'order/delivery/widget/trip_detail_widget.dart';

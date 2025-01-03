@@ -16,6 +16,7 @@ class DeliveryUpdateScreen extends StatefulWidget {
 
 class _DeliveryUpdateScreenState extends State<DeliveryUpdateScreen> {
   DateTime endTime = DateTime.now();
+  final TextEditingController _noteController = TextEditingController();
 
   final List<XFile> _images = [];
 
@@ -96,6 +97,42 @@ class _DeliveryUpdateScreenState extends State<DeliveryUpdateScreen> {
               ),
               Gaps.verticalGapOf(
                 16.0,
+              ),
+              TitleActionChild(
+                title: 'Notes',
+                titlePadding: const EdgeInsets.only(
+                  bottom: 10.0,
+                ),
+                child: CustomTextField2(
+                  hintText: _noteController.text,
+                  controller: _noteController,
+                  prefixIcon: const Icon(
+                    Icons.description_outlined,
+                  ),
+                  // isReadOnly: true,
+                ),
+              ),
+              Gaps.verticalGapOf(
+                16.0,
+              ),
+              CustomMaterialButton(
+                label: "View & Edit Materials",
+                fillButton: false,
+                backgroundColor:
+                    Theme.of(context).primaryColor.withOpacity(0.1),
+                color: AppColors.kPitchBlackColor,
+                width: MediaQuery.of(context).size.width * 0.7,
+                radius: 20,
+                height: 50,
+                elevation: 0,
+                onTap: () {
+                  Utility.navigateMaterialRoute(
+                    context,
+                    AddUpdateMaterialsScreen(
+                      data: widget.data,
+                    ),
+                  );
+                },
               ),
               if (_images.isNotEmpty)
                 Container(

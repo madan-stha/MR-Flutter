@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 .where((element) => element.status != AppConstants.active)
                 .toList();
             print("currentTasks ${currentTasks.length}");
-            print("assignedTasks----------- ${assignedTasks.length}");
+            print("assignedTasks ${assignedTasks.length}");
             return Stack(
               children: [
                 if (userState.user != null) buildProfileAppBar(userState.user!),
@@ -54,48 +54,44 @@ class _HomeScreenState extends State<HomeScreen> {
                   top: 70,
                   left: 0,
                   right: 0,
-                  child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        currentTasks.isEmpty
-                            ? Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.22,
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 4.0),
-                                margin: const EdgeInsets.symmetric(
-                                  horizontal: Dimensions.paddingSizeDefault,
-                                  vertical: Dimensions.paddingSizeEight,
+                  bottom: 0,
+                  child: Column(
+                    children: [
+                      currentTasks.isEmpty
+                          ? Container(
+                              height: MediaQuery.of(context).size.height * 0.22,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 4.0),
+                              margin: const EdgeInsets.symmetric(
+                                horizontal: Dimensions.paddingSizeDefault,
+                                vertical: Dimensions.paddingSizeEight,
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(
+                                  Dimensions.radiusDefault,
                                 ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(
-                                    Dimensions.radiusDefault,
-                                  ),
-                                  color: AppColors.white,
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    'No Current Task Found',
-                                  ),
-                                ),
-                              )
-                            : SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.22,
-                                child: ListView.builder(
-                                  itemCount: currentTasks.length,
-                                  shrinkWrap: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (context, index) {
-                                    return buildCurrentTask(
-                                        currentTasks[index]);
-                                  },
+                                color: AppColors.white,
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  'No Current Task Found',
                                 ),
                               ),
-                        TitleActionChild(
+                            )
+                          : SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.22,
+                              child: ListView.builder(
+                                itemCount: currentTasks.length,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) {
+                                  return buildCurrentTask(currentTasks[index]);
+                                },
+                              ),
+                            ),
+                      Expanded(
+                        child: TitleActionChild(
                           title: 'Tasks Assigned',
                           titlePadding: const EdgeInsets.symmetric(
                             horizontal: 10.0,
@@ -112,22 +108,25 @@ class _HomeScreenState extends State<HomeScreen> {
                           subTitleStyle: AppStyles.text16PxRegular.copyWith(
                             color: Theme.of(context).primaryColor,
                           ),
-                          child: assignedTasks.isEmpty
-                              ? const NoDataFoundScreen(
-                                  description: 'No Task Found',
-                                )
-                              : ListView.builder(
-                                  itemCount: assignedTasks.length,
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  itemBuilder: (context, index) {
-                                    return buildAssignedTask(
-                                        assignedTasks[index]);
-                                  },
-                                ),
+                          child: Expanded(
+                            child: assignedTasks.isEmpty
+                                ? const NoDataFoundScreen(
+                                    description: 'No Task Found',
+                                  )
+                                : ListView.builder(
+                                    itemCount: assignedTasks.length,
+                                    shrinkWrap: true,
+                                    physics: const BouncingScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return buildAssignedTask(
+                                        assignedTasks[index],
+                                      );
+                                    },
+                                  ),
+                          ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ],

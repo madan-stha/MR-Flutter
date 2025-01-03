@@ -34,6 +34,7 @@ export 'custom_inkwell.dart';
 export 'double_tap_trigger.dart';
 
 /// Common [Reusable] Widget
+export 'profile_reusable_widget.dart';
 export 'reusable_widget.dart';
 
 /// Text [Input] Field

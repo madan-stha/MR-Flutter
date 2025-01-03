@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:smc_flutter/src/src.dart';
 
-class  UserProvider extends ChangeNotifier {
-   UserModel? _user;
+class UserProvider extends ChangeNotifier {
+  UserModel? _user;
   UserModel? get user => _user;
 
   bool _isLoading = true;
@@ -18,12 +18,15 @@ class  UserProvider extends ChangeNotifier {
       var response = await _httpRepo.get(
         ApiConstant.profileUri,
       );
-      print('data---> ${response.data}');
-      var decodedResponses = userModelFromJson(
-        json.encode(
-          response.data["user"],
-        ),
-      );
+      print('branchdata---> ${response.data['branch']}');
+      print('userdata---> ${response.data['user']}');
+      BranchModel? branchInfo = response.data["branch"] != null
+          ? BranchModel.fromJson(response.data["branch"])
+          : null;
+      var decodedResponses = UserModel.fromJson({
+        ...response.data["user"],
+        "branch": branchInfo?.toJson(),
+      });
       userInfo = decodedResponses;
       if (userInfo != null) {
         _user = userInfo;

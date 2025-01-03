@@ -60,7 +60,7 @@ class _PickupMapScreenState extends State<PickupMapScreen> {
       body: Consumer<ProutesDetailProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else {
             var customerCoordinates;
             for (var i = 0;

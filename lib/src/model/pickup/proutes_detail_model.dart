@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:smc_flutter/src/constant/app_constant.dart';
+
 ProuteDetailModel prouteDetailModelFromJson(String str) =>
     ProuteDetailModel.fromJson(json.decode(str));
 
@@ -86,7 +88,8 @@ class Pickup {
   factory Pickup.fromJson(Map<String, dynamic> json) {
     // Handle coordinates parsing
     List<dynamic> coordinatesJson = json["coordinates"] ?? [];
-    List<double> coordinates = coordinatesJson.map((e) => (e as num).toDouble()).toList();
+    List<double> coordinates =
+        coordinatesJson.map((e) => (e as num).toDouble()).toList();
 
     return Pickup(
       id: json["id"],
@@ -116,7 +119,7 @@ class Pickup {
               id: 0,
               name: "",
               phoneNumber: "",
-            )
+              customerImage: AppConstants.profileImage)
           : Customer.fromJson(json["customer"]),
     );
   }
@@ -243,7 +246,6 @@ class Pickup {
 //         "customer": customer.toJson(),
 //       };
 // }
-
 
 // class Pickup {
 //   final int id;
@@ -374,23 +376,27 @@ class Customer {
   final int id;
   final String name;
   final dynamic phoneNumber;
+  final dynamic customerImage;
 
   Customer({
     required this.id,
     required this.name,
     required this.phoneNumber,
+    required this.customerImage,
   });
 
   factory Customer.fromJson(Map<String, dynamic> json) => Customer(
         id: json["id"],
         name: json["name"] ?? "",
         phoneNumber: json["phone_number"] ?? "",
+        customerImage: json["image"] ?? "",
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "phone_number": phoneNumber,
+        "image": customerImage
       };
 }
 

@@ -1,7 +1,8 @@
 class ApiConstant {
   // *********************** INSTANCE *********************** //
   static const String localUrl = 'http://192.168.1.80:8000';
-  static const String liveUrl = 'https://api.metalrecyclings.com';
+  // static const String liveUrl = 'https://api.metalrecyclings.com';
+  static const String liveUrl = 'https://smc.schost.me';
 
   // *********** Don't change anything below if you're not 1000% sure *********** //
 

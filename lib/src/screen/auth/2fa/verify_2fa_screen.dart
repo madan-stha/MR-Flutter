@@ -16,10 +16,18 @@ class _VerificationScreenState extends State<VerificationScreen> {
   String get otp => _otp;
   String get verificationCode => _verificationCode;
   var userProvider;
+
   @override
   void initState() {
     super.initState();
     userProvider = context.read<UserProvider>().user;
+    final userProviderData = context.read<UserProvider>();
+    if (userProviderData.user != null) {
+      userProvider = userProviderData.user;
+    } else {
+      print("UserProvider is null or user is not set.");
+      userProvider = null;
+    }
   }
 
   updateVerificationCode(String value) {

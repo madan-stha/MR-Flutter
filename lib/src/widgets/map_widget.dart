@@ -36,6 +36,7 @@ class _MapsListState extends State<MapsList> {
 
   installedMaps() async {
     availableMaps = await MapLauncher.installedMaps;
+    print("availableMaps ====> ${availableMaps}");
     setState(() {});
   }
 

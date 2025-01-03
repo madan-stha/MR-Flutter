@@ -11,8 +11,6 @@ class PickupMaterialTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('material --> $material');
-
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(

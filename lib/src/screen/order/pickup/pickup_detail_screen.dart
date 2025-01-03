@@ -20,36 +20,71 @@ class OrderDetailScreen extends StatefulWidget {
 class _OrderDetailScreenState extends State<OrderDetailScreen> {
   final ScrollController scrollController = ScrollController();
   String currentAddress = '';
+  String customerAddress = '';
   List isCustomerExpandedList = [];
   final List<LatLng> _driverLatLng = [];
   bool _isFetchingLocation = true;
   var selectedRouteStatus = 'active';
+  var coordinates = [];
 
   @override
   void initState() {
     super.initState();
     fetchData();
+    if (widget.data.coordinates.isNotEmpty &&
+        widget.data.coordinates[0].isNotEmpty) {
+      coordinates = widget.data.coordinates[0];
+      fetchCustomerAddress(coordinates[0], coordinates[1]);
+    }
     context.read<ProutesDetailProvider>().fetchData(id: widget.data.id);
   }
 
-  Future<void> getCurrentLocation() async {
-    final currentLocation = await LocationUtility.getCurrentLocation();
-    final driverCoordinates = widget.data.driverCoordinates;
+  // Future<void> getCurrentLocation() async {
+  //   final currentLocation = await LocationUtility.getCurrentLocation();
+  //   final driverCoordinates = widget.data.driverCoordinates;
 
-    if (driverCoordinates != null && driverCoordinates.isNotEmpty) {
+  //   if (driverCoordinates != null && driverCoordinates.isNotEmpty) {
+  //     setState(() {
+  //       _driverLatLng.add(LatLng(driverCoordinates[0], driverCoordinates[1]));
+  //     });
+  //   } else if (currentLocation != null) {
+  //     setState(() {
+  //       _driverLatLng.add(currentLocation);
+  //     });
+  //   } else {
+  //     print("No location found.");
+  //   }
+  //   setState(() {
+  //     _isFetchingLocation = false;
+  //   });
+  // }
+  Future<LatLng?> getCurrentLocation() async {
+    try {
+      setState(() => _isFetchingLocation = true);
+      final currentLocation = await LocationUtility.getCurrentLocation();
+      final driverCoordinates = widget.data.driverCoordinates;
+
+      LatLng locationToUse;
+      if (driverCoordinates != null && driverCoordinates.isNotEmpty) {
+        locationToUse = LatLng(driverCoordinates[0], driverCoordinates[1]);
+      } else if (currentLocation != null) {
+        locationToUse = currentLocation;
+      } else {
+        throw Exception("No location found.");
+      }
+
       setState(() {
-        _driverLatLng.add(LatLng(driverCoordinates[0], driverCoordinates[1]));
+        _driverLatLng.clear(); // Clear previous locations
+        _driverLatLng.add(locationToUse);
+        _isFetchingLocation = false;
       });
-    } else if (currentLocation != null) {
-      setState(() {
-        _driverLatLng.add(currentLocation);
-      });
-    } else {
-      print("No location found.");
+
+      return locationToUse;
+    } catch (e) {
+      setState(() => _isFetchingLocation = false);
+      print("Error getting location: $e");
+      return null;
     }
-    setState(() {
-      _isFetchingLocation = false;
-    });
   }
 
   @override
@@ -68,9 +103,22 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
       );
       currentAddress = address;
 
-      setState(() {}); // Trigger a rebuild with updated addresses
+      setState(() {});
     } catch (e) {
       // Handle errors
+    }
+  }
+
+  Future<String> fetchCustomerAddress(double latitude, double longitude) async {
+    try {
+      print('Fetching CustomerAddressssss ---------- ');
+      final address = await LocationUtility.getAddress(latitude, longitude);
+      customerAddress = address;
+      print('CustomerAddressssss ---------- ${customerAddress}');
+      return address;
+    } catch (e) {
+      print('Error fetching address: $e');
+      return 'Error fetching address';
     }
   }
 
@@ -79,6 +127,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     var name = widget.data.name.split('|');
     var name2 = name[1].toString().replaceAll('-', '');
     var finalName = "${name[0]} - $name2";
+
     return Scaffold(
       appBar: CustomAppBar(
         title: finalName,
@@ -188,10 +237,40 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     }
   }
 
+  // void updateAndStartRoute(ProutesDetailProvider state) {
+  //   var provider = context.read<ProutesDetailProvider>();
+
+  //   print('---- Updating and starting route');
+
+  //   // Check if any pickup is pending
+  //   bool anyPending = state.pickUpRoutesDetail.pickups
+  //       .any((pickup) => pickup.status == 'pending');
+
+  //   // Check if any pickup is active
+  //   bool anyActive = state.pickUpRoutesDetail.pickups
+  //       .any((pickup) => pickup.status == 'active');
+
+  //   // If there are active pickups, show message and return
+  //   if (anyActive) {
+  //     CustomToast.show('Complete the current task first.', isSuccess: false);
+  //     return;
+  //   }
+
+  //   if (!anyPending) {
+  //     // If no pending pickups, update route status
+  //     provider.updateRouteStatus(
+  //       context,
+  //       widget.data.status == 'pending' ? 'active' : 'done',
+  //       widget.data.id,
+  //     );
+
+  //     print('---- Route status updated');
+
+  //     print('---- Route status updated');
+  //   }
+
   void updateAndStartRoute(ProutesDetailProvider state) {
     var provider = context.read<ProutesDetailProvider>();
-
-    print('---- Updating and starting route');
 
     // Check if any pickup is pending
     bool anyPending = state.pickUpRoutesDetail.pickups
@@ -208,79 +287,140 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
     }
 
     if (!anyPending) {
-      // If no pending pickups, update route status
       provider.updateRouteStatus(
         context,
         widget.data.status == 'pending' ? 'active' : 'done',
         widget.data.id,
       );
-
-      print('---- Route status updated');
-
-      print('---- Route status updated');
     }
 
-    // Start route for any pending pickups
-    for (int i = 0; i < state.pickUpRoutesDetail.pickups.length; i++) {
-      if (state.pickUpRoutesDetail.pickups[i].status == 'pending') {
-        // Update only one pending pickup at a time
-        startRoute(state.pickUpRoutesDetail.pickups[i]);
-        break; // Stop after updating one pending pickup
+    // Start route for the first pending pickup
+    for (var pickup in state.pickUpRoutesDetail.pickups) {
+      if (pickup.status == 'pending') {
+        startRoute(pickup); // This will handle the complete flow
+        break;
       }
     }
   }
 
-  // Method to handle starting the route
-  void startRoute(Pickup data) {
-    if (data.status == 'pending' && widget.data.driverCoordinates == null) {
-      getCurrentLocation();
+  //   // Start route for any pending pickups
+  //   for (int i = 0; i < state.pickUpRoutesDetail.pickups.length; i++) {
+  //     if (state.pickUpRoutesDetail.pickups[i].status == 'pending') {
+  //       // Update only one pending pickup at a time
+  //       startRoute(state.pickUpRoutesDetail.pickups[i]);
+  //       break; // Stop after updating one pending pickup
+  //     }
+  //   }
+  // }
 
-      if (_isFetchingLocation) {
-        CustomToast.show('Fetching location, please wait...', isSuccess: true);
-      } else {
-        // If the order is pending and there are no driver coordinates, show the map for route selection
-        BottomModelSheet.showCustomModalBottomSheet(
-          context: context,
-          modal: MapsList(
-            location: Coords(
-              data.coordinates[0],
-              data.coordinates[1],
-            ),
-            type: AppConstants.pickup,
-            onMapSelected: (map) {
-              var provider = context.read<ProutesDetailProvider>();
-              var currentDate = DateTime.now();
-              var driverCoordinatesWithIndex = _driverLatLng
-                  .asMap()
-                  .map((key, value) => MapEntry(key.toString(), value));
-              if (data.status == 'pending') {
-                Map<String, dynamic> updateData = {
-                  'status': data.status == 'pending' ? 'active' : 'active',
-                  "started_at": DateUtility.formatDateTime(currentDate),
-                  if (driverCoordinatesWithIndex.isNotEmpty) ...{
-                    for (var entry in driverCoordinatesWithIndex.entries) ...{
-                      'attachment[${entry.key}]': entry.value
-                    }
-                  }
-                };
-                print('updateData $updateData');
-                provider.updatePickup(
-                  context,
-                  updateData,
-                  data.id,
-                );
-              }
-            },
-            destinationTitle: data.customer.name,
-            currentLocation: Coords(
-              _driverLatLng.first.latitude,
-              _driverLatLng.first.longitude,
-            ),
-            title: "${widget.data.name} ⁃ ${data.customer.name}",
-          ),
-          isDarkMode: false,
-        );
+  // Method to handle starting the route
+  // void startRoute(Pickup data) {
+  //   if (data.status == 'pending' && widget.data.driverCoordinates == null) {
+  //     getCurrentLocation();
+
+  //     if (_isFetchingLocation) {
+  //       CustomToast.show('Fetching location, please wait...', isSuccess: true);
+  //     } else {
+  //       // If the order is pending and there are no driver coordinates, show the map for route selection
+  //       BottomModelSheet.showCustomModalBottomSheet(
+  //         context: context,
+  //         modal: MapsList(
+  //           location: Coords(
+  //             data.coordinates[0],
+  //             data.coordinates[1],
+  //           ),
+  //           type: AppConstants.pickup,
+  //           onMapSelected: (map) {
+  //             var provider = context.read<ProutesDetailProvider>();
+  //             var currentDate = DateTime.now();
+  //             var driverCoordinatesWithIndex = _driverLatLng
+  //                 .asMap()
+  //                 .map((key, value) => MapEntry(key.toString(), value));
+  //             if (data.status == 'pending') {
+  //               Map<String, dynamic> updateData = {
+  //                 'status': data.status == 'pending' ? 'active' : 'active',
+  //                 "started_at": DateUtility.formatDateTime(currentDate),
+  //                 if (driverCoordinatesWithIndex.isNotEmpty) ...{
+  //                   for (var entry in driverCoordinatesWithIndex.entries) ...{
+  //                     'attachment[${entry.key}]': entry.value
+  //                   }
+  //                 }
+  //               };
+  //               print('updateData $updateData');
+  //               provider.updatePickup(
+  //                 context,
+  //                 updateData,
+  //                 data.id,
+  //               );
+  //             }
+  //           },
+  //           destinationTitle: data.customer.name,
+  //           currentLocation: Coords(
+  //             _driverLatLng.first.latitude,
+  //             _driverLatLng.first.longitude,
+  //           ),
+  //           title: "${widget.data.name} ⁃ ${data.customer.name}",
+  //         ),
+  //         isDarkMode: false,
+  //       );
+  //     }
+  //   }
+  // }
+
+  Future<void> startRoute(Pickup data) async {
+    if (data.status != 'pending') return;
+
+    if (widget.data.driverCoordinates == null) {
+      CustomToast.show('Fetching location, please wait...', isSuccess: true);
+
+      final location = await getCurrentLocation();
+      if (location == null) {
+        CustomToast.show('Failed to get location. Please try again.',
+            isSuccess: false);
+        return;
       }
+
+      // Now that we have the location, show the map modal
+      BottomModelSheet.showCustomModalBottomSheet(
+        context: context,
+        modal: MapsList(
+          location: Coords(
+            data.coordinates[0],
+            data.coordinates[1],
+          ),
+          type: AppConstants.pickup,
+          onMapSelected: (map) {
+            var provider = context.read<ProutesDetailProvider>();
+            var currentDate = DateTime.now();
+            var driverCoordinatesWithIndex = _driverLatLng
+                .asMap()
+                .map((key, value) => MapEntry(key.toString(), value));
+
+            Map<String, dynamic> updateData = {
+              'status': 'active',
+              "started_at": DateUtility.formatDateTime(currentDate),
+              if (driverCoordinatesWithIndex.isNotEmpty) ...{
+                for (var entry in driverCoordinatesWithIndex.entries) ...{
+                  'attachment[${entry.key}]': entry.value
+                }
+              }
+            };
+
+            provider.updatePickup(
+              context,
+              updateData,
+              data.id,
+            );
+          },
+          destinationTitle: data.customer.name,
+          currentLocation: Coords(
+            location.latitude,
+            location.longitude,
+          ),
+          title: "${widget.data.name} ⁃ ${data.customer.name}",
+        ),
+        isDarkMode: false,
+      );
     }
   }
 
@@ -357,8 +497,8 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
               leading: Container(
                 height: 40,
                 width: 40,
-                child: const CustomImage(
-                  AppConstants.profileImage,
+                child: CustomImage(
+                  data.customer.customerImage,
                   circular: true,
                 ),
               ),
@@ -430,7 +570,7 @@ class _OrderDetailScreenState extends State<OrderDetailScreen> {
                     builder: (context, locationProvider, child) {
                       return ReusableWidget().commonTextRender(
                         'Address',
-                        currentAddress,
+                        customerAddress,
                         onTap: () => LocationUtility.openMap(
                           locationProvider.currentLocation.latitude,
                           locationProvider.currentLocation.longitude,

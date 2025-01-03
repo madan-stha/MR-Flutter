@@ -120,6 +120,16 @@ class DeliveryDetailModel {
         "tripWeight": tripWeight,
         "items": List<dynamic>.from(items.map((x) => x.toJson())),
       };
+
+  List<Map<String, dynamic>> mapToMaterials() {
+    return items.map((item) {
+      return {
+        "id": item.id,
+        "name": item.name,
+        "weight": item.weight,
+      };
+    }).toList();
+  }
 }
 
 class Customers {
